@@ -4,7 +4,7 @@
 
 /**
 
- * print_alphabet - check the code for Holberton School students.
+ * main - check the code
 
  *
 
@@ -12,30 +12,12 @@
 
  */
 
-
-
-void print_alphabet(void)
+int main(void)
 
 {
 
-	char alp = 'a';
+    print_alphabet();
 
-
-
-	while (alp <= 'z')
-
-	{
-
-		_putchar (alp);
-
-		alp++;
-
-
-
-	}
-
-	_putchar ('\n');
-
-
+    return (0);
 
 }

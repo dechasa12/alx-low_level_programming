@@ -9,7 +9,7 @@ void fibonacci(void);
 
 int _putcha(char);
 
-int _islower(int c)
+int _islower(int c);
 
 int _isalpha(int c);
 

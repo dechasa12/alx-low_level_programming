@@ -7,7 +7,7 @@ void print_alphabet_x10(void);
 
 void fibonacci(void);
 
-int _putcha(char);
+int _putchar(char);
 
 int _islower(int c);
 

@@ -1,13 +1,10 @@
 #include "main.h"
 
 /**
- *
- *  * print_diagonal - check the code for Holberton School students.
- *
- *   *@n: variable
- *
- *    * Return: void .
- */
+* print_diagonal - check the code for Holberton School students.
+*@n: variable
+* Return: void .
+*/
 
 void print_diagonal(int n)
 

@@ -20,7 +20,6 @@ int word_len(char *str)
 	{
 		len++;
 		index++;								}
-	
 	return (len);
 }
 
@@ -60,7 +59,6 @@ char **strtow(char *str)
 {
 	char **strings;
 	int index = 0, words, w, letters, l;
-		
 	if (str == NULL || str[0] == '\0')
 		return (NULL);
 
@@ -89,13 +87,10 @@ char **strtow(char *str)
 			free(strings);
 			return (NULL);
 		}
-		
 		for (l = 0; l < letters; l++)
 			strings[w][l] = str[index++];
-		
 		strings[w][l] = '\0';
 	}
 	strings[w] = NULL;
-	
 	return (strings);
 }

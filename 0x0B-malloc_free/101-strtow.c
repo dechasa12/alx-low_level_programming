@@ -1,24 +1,48 @@
 #include "main.h"
+#include <stdlib.h>
+
+int word_len(char *str);
+
+int count_words(char *str);
+
+char **strtow(char *str);
+
 
 /**
  *
- * * _isspace - check if a character is whitespace
+ *  * word_len - Locates the index marking the end of the
  *
- * * @c: the character to check
+ *   *            first word contained within a string.
  *
- * * Return: 1 is c is a whitespace character, otherwise 0
+ *    * @str: The string to be searched.
  *
- * */
+ *     *
+ *
+ *      * Return: The index marking the end of the initial word pointed to by str.
+ *
+ *       */
 
-int _isspace(int c)
+int word_len(char *str)
 
 {
 
-		if (c == 0x20 || (c >= 0x09 && c <= 0x0d))
+		int index = 0, len = 0;
 
-					return (1);
 
-			return (0);
+
+			while (*(str + index) && *(str + index) != ' ')
+
+					{
+
+								len++;
+
+										index++;
+
+											}
+
+
+
+				return (len);
 
 }
 
@@ -26,100 +50,147 @@ int _isspace(int c)
 
 /**
  *
- * * strtow - split a string into words
+ *  * count_words - Counts the number of words contained within a string.
  *
- * * @str: a pointer to the string to split
+ *   * @str: The string to be searched.
  *
- * * Return: NULL if memory allocation fails or if str is NULL or empty (""),
+ *    *
  *
- * * otherwise return a pointer to the array of words terminated by a NULL
+ *     * Return: The number of words contained within str.
  *
- * */
+ *      */
+
+int count_words(char *str)
+
+{
+
+		int index = 0, words = 0, len = 0;
 
 
+
+			for (index = 0; *(str + index); index++)
+
+						len++;
+
+
+
+				for (index = 0; index < len; index++)
+
+						{
+
+									if (*(str + index) != ' ')
+
+												{
+
+																words++;
+
+																			index += word_len(str + index);
+
+																					}
+
+										}
+
+
+
+					return (words);
+
+}
+
+
+
+/**
+ *
+ *  * strtow - Splits a string into words.
+ *
+ *   * @str: The string to be split.
+ *
+ *    *
+ *
+ *     * Return: If str = NULL, str = "", or the function fails - NULL.
+ *
+ *      *         Otherwise - a pointer to an array of strings (words).
+ *
+ *       */
 
 char **strtow(char *str)
 
 {
 
-		char **words, *pos = str;
+		char **strings;
 
-			int w = 0, c;
+			int index = 0, words, w, letters, l;
 
 
 
-				if (!(str && *str))
+				if (str == NULL || str[0] == '\0')
 
 							return (NULL);
 
-					do {
 
-								while (_isspace(*pos))
 
-												++pos;
+					words = count_words(str);
 
-										if (!*pos)
-
-														break;
-
-												while (*(++pos) && !_isspace(*pos))
-
-																;
-
-													} while (++w, *pos);
-
-						if (!w)
+						if (words == 0)
 
 									return (NULL);
 
-						words = (char **) malloc(sizeof(char *) * (w + 1));
 
-							if (!words)
 
-										return (NULL);
+							strings = malloc(sizeof(char *) * (words + 1));
 
-								w = 0, pos = str;
+								if (strings == NULL)
 
-									do {
+											return (NULL);
 
-												while (_isspace(*pos))
 
-																++pos;
 
-														if (!*pos)
+									for (w = 0; w < words; w++)
 
-																		break;
+											{
 
-																for (str = pos++; *pos && !_isspace(*pos); ++pos)
+														while (str[index] == ' ')
 
-																				;
+																		index++;
 
-																		words[w] = (char *) malloc(sizeof(char) * (pos - str + 1));
 
-																				if (!words[w])
+
+																letters = word_len(str + index);
+
+
+
+																		strings[w] = malloc(sizeof(char) * (letters + 1));
+
+
+
+																				if (strings[w] == NULL)
 
 																							{
 
-																											while (w >  0)
+																											for (; w >= 0; w--)
 
-																																free(words[--w]);
+																																free(strings[w]);
 
-																														free(words);
+
+
+																														free(strings);
 
 																																	return (NULL);
 
 																																			}
 
-																						for (c = 0; str < pos; ++c, ++str)
 
-																										words[w][c] = *str;
 
-																								words[w][c] = '\0';
+																						for (l = 0; l < letters; l++)
 
-																									} while (++w, *pos);
+																										strings[w][l] = str[index++];
 
-										words[w] = NULL;
 
-										return (words);
+
+																								strings[w][l] = '\0';
+
+																									}
+
+										strings[w] = NULL;
+											return (strings);
 
 }

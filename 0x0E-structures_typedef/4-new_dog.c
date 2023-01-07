@@ -46,6 +46,7 @@ dog_t *new_dog(char *name, float age, char *owner)
 	pt->owner = o;
 	return (pt);
 }
+
 /**
 * _strlen - len of string
 * Return: length of string

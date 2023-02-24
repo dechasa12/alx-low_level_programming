@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-module for perimeter of island
+module for perimeter of islands
 """
 
 
@@ -25,4 +25,3 @@ def island_perimeter(grid):
                 if (i > 0 and grid[i - 1][j] == 1):
                     edges += 1
     return size * 4 - edges * 2
-  
